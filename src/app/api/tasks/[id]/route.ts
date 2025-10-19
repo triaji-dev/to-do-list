@@ -13,7 +13,7 @@ import { validateTaskUpdate } from '@/lib/validation';
 // GET /api/tasks/[id] - Get specific task
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -24,8 +24,11 @@ export async function GET(
 
     const { userId } = authResult;
 
+    // Await params in Next.js 15
+    const resolvedParams = await params;
+
     // Validate task ID
-    const taskIdResult = validateTaskId(params.id);
+    const taskIdResult = validateTaskId(resolvedParams.id);
     if (!taskIdResult.success) {
       return taskIdResult.response;
     }
@@ -51,7 +54,7 @@ export async function GET(
 // PUT /api/tasks/[id] - Update task
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -62,8 +65,11 @@ export async function PUT(
 
     const { userId } = authResult;
 
+    // Await params in Next.js 15
+    const resolvedParams = await params;
+
     // Validate task ID
-    const taskIdResult = validateTaskId(params.id);
+    const taskIdResult = validateTaskId(resolvedParams.id);
     if (!taskIdResult.success) {
       return taskIdResult.response;
     }
@@ -113,7 +119,7 @@ export async function PUT(
 // DELETE /api/tasks/[id] - Delete task
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -124,8 +130,11 @@ export async function DELETE(
 
     const { userId } = authResult;
 
+    // Await params in Next.js 15
+    const resolvedParams = await params;
+
     // Validate task ID
-    const taskIdResult = validateTaskId(params.id);
+    const taskIdResult = validateTaskId(resolvedParams.id);
     if (!taskIdResult.success) {
       return taskIdResult.response;
     }

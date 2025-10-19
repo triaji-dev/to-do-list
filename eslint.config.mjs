@@ -50,13 +50,26 @@ const eslintConfig = [
         },
       ],
     },
-    ignores: ['components/ui/**'],
+    ignores: [
+      'components/ui/**',
+      '.next/**',
+      'next-env.d.ts',
+      '**/.next/**',
+      '**/node_modules/**',
+    ],
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-empty-object-type': [
+        'error',
+        {
+          allowObjectTypes: 'always',
+        },
+      ],
+      '@typescript-eslint/triple-slash-reference': 'off',
     },
   },
 ];
